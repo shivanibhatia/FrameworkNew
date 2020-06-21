@@ -7,6 +7,7 @@ import org.testng.annotations.Listeners;
 
 import com.clearcode.utils.WebDriverUtils;
 
+
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
@@ -18,6 +19,7 @@ public class TestSetup {
         System.setProperty("atu.reporter.config", "src/test/resources/atu.properties");
     }
 	WebDriverUtils wdu = new WebDriverUtils();
+	
 	@BeforeClass
 	public void launch() {
 		wdu.initialize();

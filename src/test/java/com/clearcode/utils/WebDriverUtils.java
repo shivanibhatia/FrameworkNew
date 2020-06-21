@@ -1,5 +1,6 @@
 package com.clearcode.utils;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
 import java.util.Set;
@@ -161,6 +162,7 @@ public class WebDriverUtils {
 		public void assertText(By loc, String text) {
 			try
 			{
+							
 			Assert.assertEquals(find(loc).getText(), text);
 			ATUReports.add("Assert Text",text,find(loc).getText(), LogAs.PASSED, new CaptureScreen(
                     ScreenshotOf.BROWSER_PAGE));
@@ -170,6 +172,16 @@ public class WebDriverUtils {
 	                    ScreenshotOf.BROWSER_PAGE));
 			}
 		}
+		
+		public void getTextNode(By loc, String text)
+		{
+			
+			String mytext = (String)((JavascriptExecutor)driver).executeScript("return arguments[0].childNodes[1].textContent;", find(loc));
+			//System.out.println(mytext);
+			
+			Assert.assertEquals(mytext.trim(), text);
+		}
+		
 		
 		public void switchWindowByTitle(String title) {
 			Set<String> winids = driver.getWindowHandles();
@@ -201,6 +213,7 @@ public class WebDriverUtils {
 		
 		private WebElement find(By loc) {
 			driver.switchTo().defaultContent();
+			
 			WebElement element=null;
 			try
 			{
