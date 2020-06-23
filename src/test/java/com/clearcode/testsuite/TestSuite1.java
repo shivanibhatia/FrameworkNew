@@ -30,8 +30,31 @@ public class TestSuite1 extends TestSetup{
 	//	wdu.click(HomePage.signup_link);
 		
 	//}
-	@Test (priority=1,dataProvider="createProduct",dataProviderClass=LoginData.class)
-	public void loginAdmin(String pname, String mtitle, String model, String price, String category)
+	
+	  @Test(priority=1,dataProvider="createProduct",dataProviderClass=LoginData.class)
+	  public void loginAdmin(String pname, String mtitle, String model, String price, String category) 
+	  { 
+		  wdu.type(HomePage.username, "admin");
+		  wdu.type(HomePage.password, "admin@123"); 
+		  wdu.click(HomePage.loginbutt);
+		  wdu.mouseOver(HomePage.category); 
+		  wdu.click(HomePage.product);
+		  wdu.click(AddProductPage.addbutton);
+		  wdu.type(AddProductPage.productname,pname); 
+		  wdu.type(AddProductPage.mtitle, mtitle); 
+		  wdu.click(AddProductPage.data); 
+		  wdu.type(AddProductPage.model, model);
+		  wdu.type(AddProductPage.price, price);
+		  wdu.click(AddProductPage.links); 
+		  wdu.type(AddProductPage.category, category);
+		  wdu.click(AddProductPage.save);
+	  
+		  wdu.getTextNode(AddProductPage.msg, "Success: You have modified products!");
+	   }
+	 
+	
+	@Test(priority=2,dataProvider="productAddFail",dataProviderClass=LoginData.class)
+	public void addProductsFail(String pname, String mtitle, String model, String price, String category)
 	{
 		wdu.type(HomePage.username, "admin");
 		wdu.type(HomePage.password, "admin@123");
@@ -47,13 +70,8 @@ public class TestSuite1 extends TestSetup{
 		wdu.click(AddProductPage.links);
 		wdu.type(AddProductPage.category, category);
 		wdu.click(AddProductPage.save);
-		
-		wdu.getTextNode(AddProductPage.msg, "Success: You have modified products!");	
-		//wdu.assertText(AddProductPage.msg, "Success: You have modified products!");
-		//Assert.assertEquals(driver.findElement(By.xpath("//*[@id=\"content\"]/div[2]/div[1]"))., expected);
-	}	
-	
-
+		wdu.getTextNode(AddProductPage.dangermsg, "Warning: Please check the form carefully for errors!");
+	}
 	
 	/*
 	 * @Test(dataProvider="SearchPatient",dataProviderClass=LoginData.class) public

@@ -11,6 +11,11 @@ public class LoginData {
 	}
 	
 	@DataProvider
+	public Object[][] productAddFail(){
+		return ExcelUtils.getData("TestData.xls", "Products");
+	}
+	
+	@DataProvider
 	public Object[][] CreatePatient(){
 		return new Object[][] { 
 			new Object[] {

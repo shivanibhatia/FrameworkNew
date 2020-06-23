@@ -17,6 +17,6 @@ public class AddProductPage {
 	public static By save = By.xpath("//*[@id=\"content\"]/div[1]/div/div/button");
 	
 	public static By msg = By.className("alert-success");
-	
+	public static By dangermsg = By.className("alert-danger");
 	
 }
